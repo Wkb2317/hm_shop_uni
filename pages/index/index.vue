@@ -9,7 +9,7 @@ export default {
 		return {}
 	},
 	onLoad() {
-		console.log(this.$store.state.home.swipers)
+	
 	},
 	methods: {}
 }
