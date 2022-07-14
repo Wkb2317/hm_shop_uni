@@ -1,21 +1,50 @@
-import {
-	getSwipers
-} from '@/service/home/home.js'
+import { getSwipers, getGoodsListData } from '@/service/home/home.js'
 
 const home = {
-	namespace: true,
-	state: {
-		swipers: []
-	},
+  namespace: true,
+  state: {
+    swipers: [],
+    goodsList: []
+  },
 
-	mutations: {},
+  mutations: {
+    changeSwipers(state, data) {
+      state.swipers = data
+    },
+    changeGoodsList(state, data) {
+      state.goodsList.push(...data)
+    },
+    resetGoodsList(state, data) {
+      state.goodsList = data
+    }
+  },
 
-	actions: {
-		async getSwipersAction() {
-			const res = await getSwipers()
-			console.log(res);
-		}
-	}
+  actions: {
+    async getSwipersAction({ commit }) {
+      const res = await getSwipers()
+      if (res.data?.message) {
+        commit('changeSwipers', res.data.message)
+      }
+    },
+    async getGoodsListAction({ commit }, pageindex) {
+      const res = await getGoodsListData(pageindex)
+      return new Promise((resolve, reject) => {
+        if (res.data?.message) {
+          res.data.message.forEach((item) => {
+            item.img_url =
+              'http://image2.suning.cn/uimg/b2c/newcatentries/0070078057-000000000634917020_1_800x800.jpg'
+          })
+          if (pageindex === 1) {
+            commit('resetGoodsList', res.data.message)
+            resolve(true)
+          } else {
+            commit('changeGoodsList', res.data.message)
+            resolve(true)
+          }
+        }
+      })
+    }
+  }
 }
 
 export default home

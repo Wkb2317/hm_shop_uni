@@ -1,7 +1,14 @@
-import {
-	myRequest
-} from '../request.js'
+import { myRequest } from '../request.js'
 
-export getSwipers() {
-	return myRequest('/getlunbo')
+export function getSwipers() {
+  return myRequest({
+    url: '/getlunbo'
+  })
+}
+
+export function getGoodsListData(pageindex) {
+  return myRequest({
+    url: '/getgoods',
+    data: { pageindex }
+  })
 }
