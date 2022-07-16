@@ -12,7 +12,9 @@ export default {
     pageIndex: {
       handler: (newValue, oldValue) => {
         store.dispatch('getGoodsListAction', newValue).then((res) => {
-          uni.stopPullDownRefresh()
+          if (newValue === 1) {
+            uni.stopPullDownRefresh()
+          }
         })
       },
       immediate: true
