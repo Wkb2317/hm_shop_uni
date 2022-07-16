@@ -27,6 +27,30 @@
         "navigationBarTitleText": "会员",
         "enablePullDownRefresh": false
       }
+    },
+    {
+      "path": "pages/goods/index",
+      "style": {
+        "navigationBarTitleText": "商城"
+      }
+    },
+    {
+      "path": "pages/pic/index",
+      "style": {
+        "navigationBarTitleText": "社区图片"
+      }
+    },
+    {
+      "path": "pages/video/index",
+      "style": {
+        "navigationBarTitleText": "视频"
+      }
+    },
+    {
+      "path": "pages/concat/index",
+      "style": {
+        "navigationBarTitleText": "联系我们"
+      }
     }
   ],
   "globalStyle": {

@@ -94,15 +94,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
-var components
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-}
-var recyclableRender = false
+var render = function () {}
 var staticRenderFns = []
-render._withStripped = true
+var recyclableRender
+var components
 
 
 
@@ -159,6 +154,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
 var _index = _interopRequireDefault(__webpack_require__(/*! @/store/index.js */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
 //
@@ -185,23 +184,31 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/store/index.js */ 
 //
 //
 //
-var navItem = function navItem() {Promise.all(/*! require.ensure | components/nav-item/index */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/nav-item/index")]).then((function () {return resolve(__webpack_require__(/*! @/components/nav-item */ 49));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var goodsItem = function goodsItem() {__webpack_require__.e(/*! require.ensure | components/goods/index */ "components/goods/index").then((function () {return resolve(__webpack_require__(/*! @/components/goods */ 57));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { components: { navItem: navItem, goodsItem: goodsItem }, data: function data() {return { pageIndex: 1 };}, computed: { swipers: function swipers() {return _index.default.state.home.swipers;}, goodsList: function goodsList() {return _index.default.state.home.goodsList;} }, watch: { pageIndex: { handler: function handler(newValue, oldValue) {_index.default.dispatch('getGoodsListAction', newValue).then(function (res) {console.log(res);
+//
+//
+//
+//
+var navItem = function navItem() {Promise.all(/*! require.ensure | components/nav-item/index */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/nav-item/index")]).then((function () {return resolve(__webpack_require__(/*! @/components/nav-item */ 49));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var goodsItem = function goodsItem() {__webpack_require__.e(/*! require.ensure | components/goods/index */ "components/goods/index").then((function () {return resolve(__webpack_require__(/*! @/components/goods */ 57));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { components: { navItem: navItem, goodsItem: goodsItem }, data: function data() {return { pageIndex: 1, navBar: [{ icon: 'icon-ziyuan', title: '黑马超市' }, { icon: 'icon-guanyuwomen', title: '联系我们' }, { icon: 'icon-tupian', title: '社区图片' }, { icon: 'icon-shipin', title: '学习视频' }] };}, computed: { swipers: function swipers() {return _index.default.state.home.swipers;}, goodsList: function goodsList() {return _index.default.state.home.goodsList;} }, watch: { pageIndex: { handler: function handler(newValue, oldValue) {
+        console.log('watch');
+        _index.default.dispatch('getGoodsListAction', newValue).then(function (res) {
+          console.log(res);
           uni.stopPullDownRefresh();
         });
-      } } },
+      },
+      immediate: true } },
 
 
   onLoad: function onLoad() {
     _index.default.dispatch('getSwipersAction');
-    _index.default.dispatch('getGoodsListAction', this.pageIndex).then(function (res) {
-      console.log(res);
-    });
   },
   onReachBottom: function onReachBottom() {
     this.pageIndex = this.pageIndex + 1;
   },
   onPullDownRefresh: function onPullDownRefresh() {
     this.pageIndex = 1;
+    _index.default.dispatch('getGoodsListAction', this.pageIndex).then(function (res) {
+      uni.stopPullDownRefresh();
+    });
   },
   methods: {} };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

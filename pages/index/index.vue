@@ -8,68 +8,79 @@
     </swiper>
     <!-- 导航栏 -->
     <view class="nav-bar">
-      <nav-item icon="icon-ziyuan" title="黑马超市"></nav-item>
-      <nav-item icon="icon-guanyuwomen" title="联系我们"></nav-item>
-      <nav-item icon="icon-tupian" title="社区图片"></nav-item>
-      <nav-item icon="icon-shipin" title="学习视频"></nav-item>
+      <nav-item
+        @click.native="navItemClick(item.path)"
+        v-for="item in navBar"
+        :key="item.id"
+        :icon="item.icon"
+        :title="item.title"
+      ></nav-item>
     </view>
     <!-- 推荐商品 -->
     <view class="hot-goods">商品推荐</view>
     <!-- 商品列表 -->
-    <view class="list">
-      <view v-for="item in goodsList" :key="item.id">
-        <goods-item :goodsInfo="item"></goods-item>
-      </view>
-    </view>
+    <goods-list :goodsList="goodsList" />
   </view>
 </template>
 
 <script>
 import store from '@/store/index.js'
 import navItem from '@/components/nav-item'
-import goodsItem from '@/components/goods'
+import goodsList from '@/components/goods-list'
+import goodsMixin from '../../mixin/goodsList/index'
 
 export default {
   components: {
     navItem,
-    goodsItem
+    goodsList
   },
+  mixins: [goodsMixin],
   data() {
     return {
-      pageIndex: 1
+      navBar: [
+        {
+          id: 1,
+          icon: 'icon-ziyuan',
+          title: '黑马超市',
+          path: '/pages/goods/index'
+        },
+        {
+          id: 2,
+          icon: 'icon-guanyuwomen',
+          title: '联系我们',
+          path: '/pages/concat/index'
+        },
+        {
+          id: 3,
+          icon: 'icon-tupian',
+          title: '社区图片',
+          path: '/pages/pic/index'
+        },
+        {
+          id: 4,
+          icon: 'icon-shipin',
+          title: '学习视频',
+          path: '/pages/video/index'
+        }
+      ]
     }
   },
   computed: {
     swipers() {
       return store.state.home.swipers
-    },
-    goodsList() {
-      return store.state.home.goodsList
     }
   },
-  watch: {
-    pageIndex: {
-      handler: (newValue, oldValue) => {
-        store.dispatch('getGoodsListAction', newValue).then((res) => {
-          console.log(res)
-          uni.stopPullDownRefresh()
-        })
-      }
-    }
-  },
+  watch: {},
   onLoad() {
     store.dispatch('getSwipersAction')
-    store.dispatch('getGoodsListAction', this.pageIndex).then((res) => {
-      console.log(res)
-    })
   },
-  onReachBottom() {
-    this.pageIndex = this.pageIndex + 1
-  },
-  onPullDownRefresh() {
-    this.pageIndex = 1
-  },
-  methods: {}
+
+  methods: {
+    navItemClick(path) {
+      console.log(path)
+      uni.navigateTo({ url: path })
+    }
+  }
 }
 </script>
 
@@ -106,13 +117,6 @@ export default {
     letter-spacing: 20px;
     color: $shop-color;
     text-align: center;
-  }
-
-  .list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    background: #eee;
   }
 }
 </style>
