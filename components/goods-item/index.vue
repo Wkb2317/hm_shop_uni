@@ -32,7 +32,7 @@ export default {
   background: white;
   border-radius: 20rpx;
   padding: 10rpx;
-  margin: 10rpx 0;
+  margin: 10rpx;
   box-shadow: 8rpx 8rpx rgba(241, 241, 241, 0.561);
 
   .img {
