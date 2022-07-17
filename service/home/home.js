@@ -12,3 +12,15 @@ export function getGoodsListData(pageindex) {
     data: { pageindex }
   })
 }
+
+export function getImgCategory() {
+  return myRequest({
+    url: '/getimgcategory'
+  })
+}
+
+export function getImages(id) {
+  return myRequest({
+    url: `/getimages/${id}`
+  })
+}

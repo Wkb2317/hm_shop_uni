@@ -1,10 +1,15 @@
-import { getSwipers, getGoodsListData } from '@/service/home/home.js'
+import {
+  getSwipers,
+  getGoodsListData,
+  getImgCategory
+} from '@/service/home/home.js'
 
 const home = {
   namespace: true,
   state: {
     swipers: [],
-    goodsList: []
+    goodsList: [],
+    imgCategory: []
   },
 
   mutations: {
@@ -16,6 +21,9 @@ const home = {
     },
     resetGoodsList(state, data) {
       state.goodsList = data
+    },
+    changeImgCategory(state, data) {
+      state.imgCategory = data
     }
   },
 
@@ -43,6 +51,10 @@ const home = {
           }
         }
       })
+    },
+    async getImgCategoryAction({ commit }) {
+      const res = await getImgCategory()
+      commit('changeImgCategory', res.data.message)
     }
   }
 }
