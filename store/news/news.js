@@ -1,10 +1,23 @@
+import { getNewsList } from '../../service/news/news'
+
 const news = {
-	namespace: true,
-	state: {},
+  namespace: true,
+  state: {
+    newsList: []
+  },
 
-	mutations: {},
+  mutations: {
+    changeNewsList(state, data) {
+      state.newsList = data
+    }
+  },
 
-	actions: {}
+  actions: {
+    async getNewsListAction({ commit }) {
+      const res = await getNewsList()
+      commit('changeNewsList', res.data.message)
+    }
+  }
 }
 
 export default news

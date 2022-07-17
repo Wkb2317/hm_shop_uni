@@ -4,6 +4,7 @@
       v-for="item in goodsList"
       :key="item.id"
       :goodsInfo="item"
+      @click.native="navigetorToDetail(item.id)"
     ></goods-item>
   </view>
 </template>
@@ -23,7 +24,11 @@ export default {
   },
   data: () => ({}),
   computed: {},
-  methods: {},
+  methods: {
+    navigetorToDetail(id) {
+      uni.navigateTo({ url: `/pages/goods-detail/index?id=${id}` })
+    }
+  },
   watch: {},
 
   // 组件周期函数--监听组件挂载完毕

@@ -24,3 +24,21 @@ export function getImages(id) {
     url: `/getimages/${id}`
   })
 }
+
+export function getThumImages(id) {
+  return myRequest({
+    url: `/getthumimages/${id}`
+  })
+}
+
+export function getGoodsIndo(id) {
+  return myRequest({
+    url: `/goods/getinfo/${id}`
+  })
+}
+
+export function getGoodsDesc(id) {
+  return myRequest({
+    url: `/goods/getdesc/${id}`
+  })
+}

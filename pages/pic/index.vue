@@ -104,7 +104,7 @@ export default {
     height: 100%;
     border-right: 1px solid #eee;
     .left-scroll {
-      height: calc(100vh - 88rpx);
+      height: calc(100vh - 100rpx);
       width: 100%;
     }
 
@@ -123,14 +123,17 @@ export default {
   }
 
   .right {
+    box-sizing: border-box;
     flex: 1;
-    padding: 20rpx;
+    width: 100%;
+    height: 100%;
+    padding: 0 20rpx;
 
     .right-scroll {
-      height: calc(100vh - 90rpx);
+      height: calc(100vh - 100rpx);
       width: 100%;
       .right-item {
-        margin: 20rpx 0;
+        padding: 20rpx 0;
         .img {
           width: 100%;
           border-radius: 20rpx;
